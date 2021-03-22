@@ -34,6 +34,3 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
-# A file that I created to try the package
-vignettes/comments.Rmd
-
