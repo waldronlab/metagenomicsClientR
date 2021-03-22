@@ -1,12 +1,12 @@
-# metagenomicsClientR::NextflowEventModel
+# metagenomicsClientR2::NFModel
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**runName** | **character** |  | 
-**runId** | **character** |  | 
+**run_name** | **character** |  | 
+**run_id** | **character** |  | 
 **event** | **character** |  | 
-**utcTime** | **character** |  | 
+**utc_time** | **character** |  | 
 **trace** | **object** |  | [optional] 
 **metadata** | **object** |  | [optional] 
 

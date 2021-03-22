@@ -5,19 +5,23 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddNextflowEventNextflowEventsPost**](DefaultApi.md#AddNextflowEventNextflowEventsPost) | **POST** /nextflow/events | Add Nextflow Event
-[**AddUserUsersPost**](DefaultApi.md#AddUserUsersPost) | **POST** /users | Add User
-[**DeleteUserUsersUidDelete**](DefaultApi.md#DeleteUserUsersUidDelete) | **DELETE** /users/{uid} | Delete User
+[**CreateSampleMetadataSamplesPost**](DefaultApi.md#CreateSampleMetadataSamplesPost) | **POST** /metadata/samples | Create Sample
+[**CreateStudyMetadataStudiesPost**](DefaultApi.md#CreateStudyMetadataStudiesPost) | **POST** /metadata/studies | Create Study
+[**DeleteStudyMetadataStudiesUuidDelete**](DefaultApi.md#DeleteStudyMetadataStudiesUuidDelete) | **DELETE** /metadata/studies/{uuid} | Delete Study
 [**FilesChangeFilesChangesPost**](DefaultApi.md#FilesChangeFilesChangesPost) | **POST** /files/changes | Files Change
 [**GenerateDownloadSignedUrlV4FilesSignedGet**](DefaultApi.md#GenerateDownloadSignedUrlV4FilesSignedGet) | **GET** /files/signed | Generate Download Signed Url V4
 [**GetNextflowEventNextflowEventsIdGet**](DefaultApi.md#GetNextflowEventNextflowEventsIdGet) | **GET** /nextflow/events/{id} | Get Nextflow Event
-[**GetUserUsersUidGet**](DefaultApi.md#GetUserUsersUidGet) | **GET** /users/{uid} | Get User
+[**GetSamplesMetadataSamplesGet**](DefaultApi.md#GetSamplesMetadataSamplesGet) | **GET** /metadata/samples | Get Samples
+[**GetStudiesMetadataStudiesGet**](DefaultApi.md#GetStudiesMetadataStudiesGet) | **GET** /metadata/studies | Get Studies
+[**GetUuidFromStringMetadataUuidGet**](DefaultApi.md#GetUuidFromStringMetadataUuidGet) | **GET** /metadata/uuid | Get Uuid From String
 [**ListFileEventsFilesChangesGet**](DefaultApi.md#ListFileEventsFilesChangesGet) | **GET** /files/changes | List File Events
 [**ListNextflowEventsNextflowEventsGet**](DefaultApi.md#ListNextflowEventsNextflowEventsGet) | **GET** /nextflow/events | List Nextflow Events
-[**ListUsersUsersGet**](DefaultApi.md#ListUsersUsersGet) | **GET** /users | List Users
+[**SamplesForStudyMetadataStudiesUuidSamplesGet**](DefaultApi.md#SamplesForStudyMetadataStudiesUuidSamplesGet) | **GET** /metadata/studies/{uuid}/samples | Samples For Study
+[**SamplesJsonMetadataSamplesjsonGet**](DefaultApi.md#SamplesJsonMetadataSamplesjsonGet) | **GET** /metadata/samplesjson | Samples Json
 
 
 # **AddNextflowEventNextflowEventsPost**
-> AnyType AddNextflowEventNextflowEventsPost(nextflow.event.model)
+> AnyType AddNextflowEventNextflowEventsPost(nf.model)
 
 Add Nextflow Event
 
@@ -25,13 +29,13 @@ Events from running Nextflow pipelines when using -with-weblog.  See [the Nextfl
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
-var.nextflow.event.model <- NextflowEventModel$new("runName_example", "runId_example", "event_example", "utcTime_example", 123, 123) # NextflowEventModel | 
+var.nf.model <- NFModel$new("run_name_example", "run_id_example", "event_example", "utc_time_example", 123, 123) # NFModel | 
 
 #Add Nextflow Event
 api.instance <- DefaultApi$new()
-result <- api.instance$AddNextflowEventNextflowEventsPost(var.nextflow.event.model)
+result <- api.instance$AddNextflowEventNextflowEventsPost(var.nf.model)
 dput(result)
 ```
 
@@ -39,7 +43,7 @@ dput(result)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **nextflow.event.model** | [**NextflowEventModel**](NextflowEventModel.md)|  | 
+ **nf.model** | [**NFModel**](NFModel.md)|  | 
 
 ### Return type
 
@@ -60,20 +64,20 @@ No authorization required
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 
-# **AddUserUsersPost**
-> AnyType AddUserUsersPost(user.model)
+# **CreateSampleMetadataSamplesPost**
+> AnyType CreateSampleMetadataSamplesPost(sample)
 
-Add User
+Create Sample
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
-var.user.model <- UserModel$new("name_example") # UserModel | 
+var.sample <- Sample$new("name_example", "hash_example") # Sample | 
 
-#Add User
+#Create Sample
 api.instance <- DefaultApi$new()
-result <- api.instance$AddUserUsersPost(var.user.model)
+result <- api.instance$CreateSampleMetadataSamplesPost(var.sample)
 dput(result)
 ```
 
@@ -81,7 +85,7 @@ dput(result)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user.model** | [**UserModel**](UserModel.md)|  | 
+ **sample** | [**Sample**](Sample.md)|  | 
 
 ### Return type
 
@@ -102,20 +106,20 @@ No authorization required
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 
-# **DeleteUserUsersUidDelete**
-> AnyType DeleteUserUsersUidDelete(uid)
+# **CreateStudyMetadataStudiesPost**
+> AnyType CreateStudyMetadataStudiesPost(study)
 
-Delete User
+Create Study
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
-var.uid <- 56 # integer | 
+var.study <- Study$new("name_example", 123) # Study | 
 
-#Delete User
+#Create Study
 api.instance <- DefaultApi$new()
-result <- api.instance$DeleteUserUsersUidDelete(var.uid)
+result <- api.instance$CreateStudyMetadataStudiesPost(var.study)
 dput(result)
 ```
 
@@ -123,7 +127,49 @@ dput(result)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **integer**|  | 
+ **study** | [**Study**](Study.md)|  | 
+
+### Return type
+
+[**AnyType**](AnyType.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+# **DeleteStudyMetadataStudiesUuidDelete**
+> AnyType DeleteStudyMetadataStudiesUuidDelete(uuid)
+
+Delete Study
+
+### Example
+```R
+library(metagenomicsClientR2)
+
+var.uuid <- 'uuid_example' # character | 
+
+#Delete Study
+api.instance <- DefaultApi$new()
+result <- api.instance$DeleteStudyMetadataStudiesUuidDelete(var.uuid)
+dput(result)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **uuid** | [**character**](.md)|  | 
 
 ### Return type
 
@@ -153,7 +199,7 @@ Track all changes in cloud storage
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
 var.body <- NULL # object | 
 
@@ -197,7 +243,7 @@ Generates a v4 signed URL for downloading a blob.  Note that this method require
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
 var.name <- 'name_example' # character | 
 
@@ -239,7 +285,7 @@ Get Nextflow Event
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
 var.id <- 'id_example' # character | 
 
@@ -274,20 +320,94 @@ No authorization required
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 
-# **GetUserUsersUidGet**
-> AnyType GetUserUsersUidGet(uid)
+# **GetSamplesMetadataSamplesGet**
+> AnyType GetSamplesMetadataSamplesGet()
 
-Get User
+Get Samples
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
-var.uid <- 56 # integer | 
 
-#Get User
+#Get Samples
 api.instance <- DefaultApi$new()
-result <- api.instance$GetUserUsersUidGet(var.uid)
+result <- api.instance$GetSamplesMetadataSamplesGet()
+dput(result)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**AnyType**](AnyType.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+
+# **GetStudiesMetadataStudiesGet**
+> AnyType GetStudiesMetadataStudiesGet()
+
+Get Studies
+
+### Example
+```R
+library(metagenomicsClientR2)
+
+
+#Get Studies
+api.instance <- DefaultApi$new()
+result <- api.instance$GetStudiesMetadataStudiesGet()
+dput(result)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**AnyType**](AnyType.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+
+# **GetUuidFromStringMetadataUuidGet**
+> AnyType GetUuidFromStringMetadataUuidGet(string)
+
+Get Uuid From String
+
+### Example
+```R
+library(metagenomicsClientR2)
+
+var.string <- 'string_example' # character | 
+
+#Get Uuid From String
+api.instance <- DefaultApi$new()
+result <- api.instance$GetUuidFromStringMetadataUuidGet(var.string)
 dput(result)
 ```
 
@@ -295,7 +415,7 @@ dput(result)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **integer**|  | 
+ **string** | **character**|  | 
 
 ### Return type
 
@@ -323,7 +443,7 @@ List File Events
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
 var.limit <- 100 # integer | 
 var.offset <- 0 # integer | 
@@ -367,13 +487,13 @@ No authorization required
 | **422** | Validation Error |  -  |
 
 # **ListNextflowEventsNextflowEventsGet**
-> AnyType ListNextflowEventsNextflowEventsGet(limit=100, offset=0)
+> NFCollection ListNextflowEventsNextflowEventsGet(limit=100, offset=0)
 
 List Nextflow Events
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
 var.limit <- 100 # integer | 
 var.offset <- 0 # integer | 
@@ -390,6 +510,48 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **integer**|  | [optional] [default to 100]
  **offset** | **integer**|  | [optional] [default to 0]
+
+### Return type
+
+[**NFCollection**](NFCollection.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+# **SamplesForStudyMetadataStudiesUuidSamplesGet**
+> AnyType SamplesForStudyMetadataStudiesUuidSamplesGet(uuid)
+
+Samples For Study
+
+### Example
+```R
+library(metagenomicsClientR2)
+
+var.uuid <- 'uuid_example' # character | 
+
+#Samples For Study
+api.instance <- DefaultApi$new()
+result <- api.instance$SamplesForStudyMetadataStudiesUuidSamplesGet(var.uuid)
+dput(result)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **uuid** | [**character**](.md)|  | 
 
 ### Return type
 
@@ -410,19 +572,19 @@ No authorization required
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 
-# **ListUsersUsersGet**
-> AnyType ListUsersUsersGet()
+# **SamplesJsonMetadataSamplesjsonGet**
+> AnyType SamplesJsonMetadataSamplesjsonGet()
 
-List Users
+Samples Json
 
 ### Example
 ```R
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
 
-#List Users
+#Samples Json
 api.instance <- DefaultApi$new()
-result <- api.instance$ListUsersUsersGet()
+result <- api.instance$SamplesJsonMetadataSamplesjsonGet()
 dput(result)
 ```
 

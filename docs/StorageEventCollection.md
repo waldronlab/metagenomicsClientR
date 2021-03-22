@@ -1,4 +1,4 @@
-# metagenomicsClientR::StorageEventCollection
+# metagenomicsClientR2::StorageEventCollection
 
 ## Properties
 Name | Type | Description | Notes

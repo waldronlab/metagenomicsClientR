@@ -27,6 +27,23 @@ api = DefaultApi$new(apiClient = client)
 api
 ```
 
+```{r}
+
+api$GetSamplesMetadataSamplesGet()
+
+api$GetUuidFromStringMetadataUuidGet(string = "Asnicar_2021")
+
+api$SamplesForStudyMetadataStudiesUuidSamplesGet(uuid = "b3416924-2c11-519b-95ba-42d388114c5f")
+
+
+
+
+```
+
+
+
+
+
 
 
 # Queries

@@ -1,4 +1,4 @@
-# metagenomicsClientR::HTTPValidationError
+# metagenomicsClientR2::HTTPValidationError
 
 ## Properties
 Name | Type | Description | Notes

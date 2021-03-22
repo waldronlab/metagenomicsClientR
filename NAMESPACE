@@ -7,10 +7,13 @@ export(ApiResponse)
 
 # Models
 export(HTTPValidationError)
-export(NextflowEventModel)
+export(NFCollection)
+export(NFModel)
+export(NFReturn)
+export(Sample)
 export(StorageEventCollection)
 export(StorageEventReturn)
-export(UserModel)
+export(Study)
 export(ValidationError)
 
 # APIs

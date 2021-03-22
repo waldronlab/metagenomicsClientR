@@ -8,7 +8,7 @@
 
 #' @docType class
 #' @title Default operations
-#' @description metagenomicsClientR.Default
+#' @description metagenomicsClientR2.Default
 #' @format An \code{R6Class} generator object
 #' @field apiClient Handles the client-server communication.
 #'
@@ -18,7 +18,7 @@
 #' Events from running Nextflow pipelines when using -with-weblog.  See [the Nextflow documentation](https://www.nextflow.io/docs/latest/tracing.html#weblog-via-http).
 #'
 #' \itemize{
-#' \item \emph{ @param } nextflow.event.model \link{NextflowEventModel}
+#' \item \emph{ @param } nf.model \link{NFModel}
 #' \item \emph{ @returnType } \link{AnyType} \cr
 #'
 #'
@@ -38,11 +38,11 @@
 #' }
 #' }
 #'
-#' \strong{ AddUserUsersPost } \emph{ Add User }
+#' \strong{ CreateSampleMetadataSamplesPost } \emph{ Create Sample }
 #' 
 #'
 #' \itemize{
-#' \item \emph{ @param } user.model \link{UserModel}
+#' \item \emph{ @param } sample \link{Sample}
 #' \item \emph{ @returnType } \link{AnyType} \cr
 #'
 #'
@@ -62,11 +62,35 @@
 #' }
 #' }
 #'
-#' \strong{ DeleteUserUsersUidDelete } \emph{ Delete User }
+#' \strong{ CreateStudyMetadataStudiesPost } \emph{ Create Study }
 #' 
 #'
 #' \itemize{
-#' \item \emph{ @param } uid integer
+#' \item \emph{ @param } study \link{Study}
+#' \item \emph{ @returnType } \link{AnyType} \cr
+#'
+#'
+#' \item status code : 200 | Successful Response
+#'
+#' \item return type : AnyType 
+#' \item response headers :
+#'
+#' \tabular{ll}{
+#' }
+#' \item status code : 422 | Validation Error
+#'
+#' \item return type : HTTPValidationError 
+#' \item response headers :
+#'
+#' \tabular{ll}{
+#' }
+#' }
+#'
+#' \strong{ DeleteStudyMetadataStudiesUuidDelete } \emph{ Delete Study }
+#' 
+#'
+#' \itemize{
+#' \item \emph{ @param } uuid \link{character}
 #' \item \emph{ @returnType } \link{AnyType} \cr
 #'
 #'
@@ -158,11 +182,43 @@
 #' }
 #' }
 #'
-#' \strong{ GetUserUsersUidGet } \emph{ Get User }
+#' \strong{ GetSamplesMetadataSamplesGet } \emph{ Get Samples }
 #' 
 #'
 #' \itemize{
-#' \item \emph{ @param } uid integer
+#' \item \emph{ @returnType } \link{AnyType} \cr
+#'
+#'
+#' \item status code : 200 | Successful Response
+#'
+#' \item return type : AnyType 
+#' \item response headers :
+#'
+#' \tabular{ll}{
+#' }
+#' }
+#'
+#' \strong{ GetStudiesMetadataStudiesGet } \emph{ Get Studies }
+#' 
+#'
+#' \itemize{
+#' \item \emph{ @returnType } \link{AnyType} \cr
+#'
+#'
+#' \item status code : 200 | Successful Response
+#'
+#' \item return type : AnyType 
+#' \item response headers :
+#'
+#' \tabular{ll}{
+#' }
+#' }
+#'
+#' \strong{ GetUuidFromStringMetadataUuidGet } \emph{ Get Uuid From String }
+#' 
+#'
+#' \itemize{
+#' \item \emph{ @param } string character
 #' \item \emph{ @returnType } \link{AnyType} \cr
 #'
 #'
@@ -216,6 +272,30 @@
 #' \itemize{
 #' \item \emph{ @param } limit integer
 #' \item \emph{ @param } offset integer
+#' \item \emph{ @returnType } \link{NFCollection} \cr
+#'
+#'
+#' \item status code : 200 | Successful Response
+#'
+#' \item return type : NFCollection 
+#' \item response headers :
+#'
+#' \tabular{ll}{
+#' }
+#' \item status code : 422 | Validation Error
+#'
+#' \item return type : HTTPValidationError 
+#' \item response headers :
+#'
+#' \tabular{ll}{
+#' }
+#' }
+#'
+#' \strong{ SamplesForStudyMetadataStudiesUuidSamplesGet } \emph{ Samples For Study }
+#' 
+#'
+#' \itemize{
+#' \item \emph{ @param } uuid \link{character}
 #' \item \emph{ @returnType } \link{AnyType} \cr
 #'
 #'
@@ -235,7 +315,7 @@
 #' }
 #' }
 #'
-#' \strong{ ListUsersUsersGet } \emph{ List Users }
+#' \strong{ SamplesJsonMetadataSamplesjsonGet } \emph{ Samples Json }
 #' 
 #'
 #' \itemize{
@@ -258,40 +338,51 @@
 #' \dontrun{
 #' ####################  AddNextflowEventNextflowEventsPost  ####################
 #'
-#' library(metagenomicsClientR)
-#' var.nextflow.event.model <- NextflowEventModel$new() # NextflowEventModel | 
+#' library(metagenomicsClientR2)
+#' var.nf.model <- NFModel$new() # NFModel | 
 #'
 #' #Add Nextflow Event
 #' api.instance <- DefaultApi$new()
 #'
-#' result <- api.instance$AddNextflowEventNextflowEventsPost(var.nextflow.event.model)
+#' result <- api.instance$AddNextflowEventNextflowEventsPost(var.nf.model)
 #'
 #'
-#' ####################  AddUserUsersPost  ####################
+#' ####################  CreateSampleMetadataSamplesPost  ####################
 #'
-#' library(metagenomicsClientR)
-#' var.user.model <- UserModel$new() # UserModel | 
+#' library(metagenomicsClientR2)
+#' var.sample <- Sample$new() # Sample | 
 #'
-#' #Add User
+#' #Create Sample
 #' api.instance <- DefaultApi$new()
 #'
-#' result <- api.instance$AddUserUsersPost(var.user.model)
+#' result <- api.instance$CreateSampleMetadataSamplesPost(var.sample)
 #'
 #'
-#' ####################  DeleteUserUsersUidDelete  ####################
+#' ####################  CreateStudyMetadataStudiesPost  ####################
 #'
-#' library(metagenomicsClientR)
-#' var.uid <- 56 # integer | 
+#' library(metagenomicsClientR2)
+#' var.study <- Study$new() # Study | 
 #'
-#' #Delete User
+#' #Create Study
 #' api.instance <- DefaultApi$new()
 #'
-#' result <- api.instance$DeleteUserUsersUidDelete(var.uid)
+#' result <- api.instance$CreateStudyMetadataStudiesPost(var.study)
+#'
+#'
+#' ####################  DeleteStudyMetadataStudiesUuidDelete  ####################
+#'
+#' library(metagenomicsClientR2)
+#' var.uuid <- 'uuid_example' # character | 
+#'
+#' #Delete Study
+#' api.instance <- DefaultApi$new()
+#'
+#' result <- api.instance$DeleteStudyMetadataStudiesUuidDelete(var.uuid)
 #'
 #'
 #' ####################  FilesChangeFilesChangesPost  ####################
 #'
-#' library(metagenomicsClientR)
+#' library(metagenomicsClientR2)
 #' var.body <- NULL # object | 
 #'
 #' #Files Change
@@ -302,7 +393,7 @@
 #'
 #' ####################  GenerateDownloadSignedUrlV4FilesSignedGet  ####################
 #'
-#' library(metagenomicsClientR)
+#' library(metagenomicsClientR2)
 #' var.name <- 'name_example' # character | 
 #'
 #' #Generate Download Signed Url V4
@@ -313,7 +404,7 @@
 #'
 #' ####################  GetNextflowEventNextflowEventsIdGet  ####################
 #'
-#' library(metagenomicsClientR)
+#' library(metagenomicsClientR2)
 #' var.id <- 'id_example' # character | 
 #'
 #' #Get Nextflow Event
@@ -322,20 +413,40 @@
 #' result <- api.instance$GetNextflowEventNextflowEventsIdGet(var.id)
 #'
 #'
-#' ####################  GetUserUsersUidGet  ####################
+#' ####################  GetSamplesMetadataSamplesGet  ####################
 #'
-#' library(metagenomicsClientR)
-#' var.uid <- 56 # integer | 
+#' library(metagenomicsClientR2)
 #'
-#' #Get User
+#' #Get Samples
 #' api.instance <- DefaultApi$new()
 #'
-#' result <- api.instance$GetUserUsersUidGet(var.uid)
+#' result <- api.instance$GetSamplesMetadataSamplesGet()
+#'
+#'
+#' ####################  GetStudiesMetadataStudiesGet  ####################
+#'
+#' library(metagenomicsClientR2)
+#'
+#' #Get Studies
+#' api.instance <- DefaultApi$new()
+#'
+#' result <- api.instance$GetStudiesMetadataStudiesGet()
+#'
+#'
+#' ####################  GetUuidFromStringMetadataUuidGet  ####################
+#'
+#' library(metagenomicsClientR2)
+#' var.string <- 'string_example' # character | 
+#'
+#' #Get Uuid From String
+#' api.instance <- DefaultApi$new()
+#'
+#' result <- api.instance$GetUuidFromStringMetadataUuidGet(var.string)
 #'
 #'
 #' ####################  ListFileEventsFilesChangesGet  ####################
 #'
-#' library(metagenomicsClientR)
+#' library(metagenomicsClientR2)
 #' var.limit <- 100 # integer | 
 #' var.offset <- 0 # integer | 
 #' var.start.date <- 'start.date_example' # character | 
@@ -350,7 +461,7 @@
 #'
 #' ####################  ListNextflowEventsNextflowEventsGet  ####################
 #'
-#' library(metagenomicsClientR)
+#' library(metagenomicsClientR2)
 #' var.limit <- 100 # integer | 
 #' var.offset <- 0 # integer | 
 #'
@@ -360,14 +471,25 @@
 #' result <- api.instance$ListNextflowEventsNextflowEventsGet(limit=var.limit, offset=var.offset)
 #'
 #'
-#' ####################  ListUsersUsersGet  ####################
+#' ####################  SamplesForStudyMetadataStudiesUuidSamplesGet  ####################
 #'
-#' library(metagenomicsClientR)
+#' library(metagenomicsClientR2)
+#' var.uuid <- 'uuid_example' # character | 
 #'
-#' #List Users
+#' #Samples For Study
 #' api.instance <- DefaultApi$new()
 #'
-#' result <- api.instance$ListUsersUsersGet()
+#' result <- api.instance$SamplesForStudyMetadataStudiesUuidSamplesGet(var.uuid)
+#'
+#'
+#' ####################  SamplesJsonMetadataSamplesjsonGet  ####################
+#'
+#' library(metagenomicsClientR2)
+#'
+#' #Samples Json
+#' api.instance <- DefaultApi$new()
+#'
+#' result <- api.instance$SamplesJsonMetadataSamplesjsonGet()
 #'
 #'
 #' }
@@ -386,8 +508,8 @@ DefaultApi <- R6::R6Class(
         self$apiClient <- ApiClient$new()
       }
     },
-    AddNextflowEventNextflowEventsPost = function(nextflow.event.model, ...){
-      apiResponse <- self$AddNextflowEventNextflowEventsPostWithHttpInfo(nextflow.event.model, ...)
+    AddNextflowEventNextflowEventsPost = function(nf.model, ...){
+      apiResponse <- self$AddNextflowEventNextflowEventsPostWithHttpInfo(nf.model, ...)
       resp <- apiResponse$response
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         apiResponse$content
@@ -400,17 +522,17 @@ DefaultApi <- R6::R6Class(
       }
     },
 
-    AddNextflowEventNextflowEventsPostWithHttpInfo = function(nextflow.event.model, ...){
+    AddNextflowEventNextflowEventsPostWithHttpInfo = function(nf.model, ...){
       args <- list(...)
       queryParams <- list()
       headerParams <- c()
 
-      if (missing(`nextflow.event.model`)) {
-        stop("Missing required parameter `nextflow.event.model`.")
+      if (missing(`nf.model`)) {
+        stop("Missing required parameter `nf.model`.")
       }
 
-      if (!missing(`nextflow.event.model`)) {
-        body <- `nextflow.event.model`$toJSONString()
+      if (!missing(`nf.model`)) {
+        body <- `nf.model`$toJSONString()
       } else {
         body <- NULL
       }
@@ -426,7 +548,7 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -440,8 +562,8 @@ DefaultApi <- R6::R6Class(
         ApiResponse$new("API server error", resp)
       }
     },
-    AddUserUsersPost = function(user.model, ...){
-      apiResponse <- self$AddUserUsersPostWithHttpInfo(user.model, ...)
+    CreateSampleMetadataSamplesPost = function(sample, ...){
+      apiResponse <- self$CreateSampleMetadataSamplesPostWithHttpInfo(sample, ...)
       resp <- apiResponse$response
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         apiResponse$content
@@ -454,22 +576,22 @@ DefaultApi <- R6::R6Class(
       }
     },
 
-    AddUserUsersPostWithHttpInfo = function(user.model, ...){
+    CreateSampleMetadataSamplesPostWithHttpInfo = function(sample, ...){
       args <- list(...)
       queryParams <- list()
       headerParams <- c()
 
-      if (missing(`user.model`)) {
-        stop("Missing required parameter `user.model`.")
+      if (missing(`sample`)) {
+        stop("Missing required parameter `sample`.")
       }
 
-      if (!missing(`user.model`)) {
-        body <- `user.model`$toJSONString()
+      if (!missing(`sample`)) {
+        body <- `sample`$toJSONString()
       } else {
         body <- NULL
       }
 
-      urlPath <- "/users"
+      urlPath <- "/metadata/samples"
 
       resp <- self$apiClient$CallApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "POST",
@@ -480,7 +602,7 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -494,8 +616,8 @@ DefaultApi <- R6::R6Class(
         ApiResponse$new("API server error", resp)
       }
     },
-    DeleteUserUsersUidDelete = function(uid, ...){
-      apiResponse <- self$DeleteUserUsersUidDeleteWithHttpInfo(uid, ...)
+    CreateStudyMetadataStudiesPost = function(study, ...){
+      apiResponse <- self$CreateStudyMetadataStudiesPostWithHttpInfo(study, ...)
       resp <- apiResponse$response
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         apiResponse$content
@@ -508,19 +630,73 @@ DefaultApi <- R6::R6Class(
       }
     },
 
-    DeleteUserUsersUidDeleteWithHttpInfo = function(uid, ...){
+    CreateStudyMetadataStudiesPostWithHttpInfo = function(study, ...){
       args <- list(...)
       queryParams <- list()
       headerParams <- c()
 
-      if (missing(`uid`)) {
-        stop("Missing required parameter `uid`.")
+      if (missing(`study`)) {
+        stop("Missing required parameter `study`.")
+      }
+
+      if (!missing(`study`)) {
+        body <- `study`$toJSONString()
+      } else {
+        body <- NULL
+      }
+
+      urlPath <- "/metadata/studies"
+
+      resp <- self$apiClient$CallApi(url = paste0(self$apiClient$basePath, urlPath),
+                                 method = "POST",
+                                 queryParams = queryParams,
+                                 headerParams = headerParams,
+                                 body = body,
+                                 ...)
+
+      if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
+        deserializedRespObj <- tryCatch(
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
+          error = function(e){
+             stop("Failed to deserialize response")
+          }
+        )
+        ApiResponse$new(deserializedRespObj, resp)
+      } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
+        ApiResponse$new(paste("Server returned " , httr::status_code(resp) , " response status code."), resp)
+      } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
+        ApiResponse$new("API client error", resp)
+      } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
+        ApiResponse$new("API server error", resp)
+      }
+    },
+    DeleteStudyMetadataStudiesUuidDelete = function(uuid, ...){
+      apiResponse <- self$DeleteStudyMetadataStudiesUuidDeleteWithHttpInfo(uuid, ...)
+      resp <- apiResponse$response
+      if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
+        apiResponse$content
+      } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
+        apiResponse
+      } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
+        apiResponse
+      } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
+        apiResponse
+      }
+    },
+
+    DeleteStudyMetadataStudiesUuidDeleteWithHttpInfo = function(uuid, ...){
+      args <- list(...)
+      queryParams <- list()
+      headerParams <- c()
+
+      if (missing(`uuid`)) {
+        stop("Missing required parameter `uuid`.")
       }
 
       body <- NULL
-      urlPath <- "/users/{uid}"
-      if (!missing(`uid`)) {
-        urlPath <- gsub(paste0("\\{", "uid", "\\}"), URLencode(as.character(`uid`), reserved = TRUE), urlPath)
+      urlPath <- "/metadata/studies/{uuid}"
+      if (!missing(`uuid`)) {
+        urlPath <- gsub(paste0("\\{", "uuid", "\\}"), URLencode(as.character(`uuid`), reserved = TRUE), urlPath)
       }
 
 
@@ -533,7 +709,7 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -587,7 +763,7 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -638,7 +814,7 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -691,7 +867,7 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -705,8 +881,8 @@ DefaultApi <- R6::R6Class(
         ApiResponse$new("API server error", resp)
       }
     },
-    GetUserUsersUidGet = function(uid, ...){
-      apiResponse <- self$GetUserUsersUidGetWithHttpInfo(uid, ...)
+    GetSamplesMetadataSamplesGet = function(...){
+      apiResponse <- self$GetSamplesMetadataSamplesGetWithHttpInfo(...)
       resp <- apiResponse$response
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         apiResponse$content
@@ -719,21 +895,13 @@ DefaultApi <- R6::R6Class(
       }
     },
 
-    GetUserUsersUidGetWithHttpInfo = function(uid, ...){
+    GetSamplesMetadataSamplesGetWithHttpInfo = function(...){
       args <- list(...)
       queryParams <- list()
       headerParams <- c()
 
-      if (missing(`uid`)) {
-        stop("Missing required parameter `uid`.")
-      }
-
       body <- NULL
-      urlPath <- "/users/{uid}"
-      if (!missing(`uid`)) {
-        urlPath <- gsub(paste0("\\{", "uid", "\\}"), URLencode(as.character(`uid`), reserved = TRUE), urlPath)
-      }
-
+      urlPath <- "/metadata/samples"
 
       resp <- self$apiClient$CallApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "GET",
@@ -744,7 +912,103 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
+          error = function(e){
+             stop("Failed to deserialize response")
+          }
+        )
+        ApiResponse$new(deserializedRespObj, resp)
+      } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
+        ApiResponse$new(paste("Server returned " , httr::status_code(resp) , " response status code."), resp)
+      } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
+        ApiResponse$new("API client error", resp)
+      } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
+        ApiResponse$new("API server error", resp)
+      }
+    },
+    GetStudiesMetadataStudiesGet = function(...){
+      apiResponse <- self$GetStudiesMetadataStudiesGetWithHttpInfo(...)
+      resp <- apiResponse$response
+      if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
+        apiResponse$content
+      } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
+        apiResponse
+      } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
+        apiResponse
+      } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
+        apiResponse
+      }
+    },
+
+    GetStudiesMetadataStudiesGetWithHttpInfo = function(...){
+      args <- list(...)
+      queryParams <- list()
+      headerParams <- c()
+
+      body <- NULL
+      urlPath <- "/metadata/studies"
+
+      resp <- self$apiClient$CallApi(url = paste0(self$apiClient$basePath, urlPath),
+                                 method = "GET",
+                                 queryParams = queryParams,
+                                 headerParams = headerParams,
+                                 body = body,
+                                 ...)
+
+      if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
+        deserializedRespObj <- tryCatch(
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
+          error = function(e){
+             stop("Failed to deserialize response")
+          }
+        )
+        ApiResponse$new(deserializedRespObj, resp)
+      } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
+        ApiResponse$new(paste("Server returned " , httr::status_code(resp) , " response status code."), resp)
+      } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
+        ApiResponse$new("API client error", resp)
+      } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
+        ApiResponse$new("API server error", resp)
+      }
+    },
+    GetUuidFromStringMetadataUuidGet = function(string, ...){
+      apiResponse <- self$GetUuidFromStringMetadataUuidGetWithHttpInfo(string, ...)
+      resp <- apiResponse$response
+      if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
+        apiResponse$content
+      } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
+        apiResponse
+      } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
+        apiResponse
+      } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
+        apiResponse
+      }
+    },
+
+    GetUuidFromStringMetadataUuidGetWithHttpInfo = function(string, ...){
+      args <- list(...)
+      queryParams <- list()
+      headerParams <- c()
+
+      if (missing(`string`)) {
+        stop("Missing required parameter `string`.")
+      }
+
+      queryParams['string'] <- string
+
+      body <- NULL
+      urlPath <- "/metadata/uuid"
+
+      resp <- self$apiClient$CallApi(url = paste0(self$apiClient$basePath, urlPath),
+                                 method = "GET",
+                                 queryParams = queryParams,
+                                 headerParams = headerParams,
+                                 body = body,
+                                 ...)
+
+      if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
+        deserializedRespObj <- tryCatch(
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -799,7 +1063,7 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "StorageEventCollection", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "StorageEventCollection", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -848,7 +1112,7 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "NFCollection", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }
@@ -862,8 +1126,8 @@ DefaultApi <- R6::R6Class(
         ApiResponse$new("API server error", resp)
       }
     },
-    ListUsersUsersGet = function(...){
-      apiResponse <- self$ListUsersUsersGetWithHttpInfo(...)
+    SamplesForStudyMetadataStudiesUuidSamplesGet = function(uuid, ...){
+      apiResponse <- self$SamplesForStudyMetadataStudiesUuidSamplesGetWithHttpInfo(uuid, ...)
       resp <- apiResponse$response
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         apiResponse$content
@@ -876,13 +1140,21 @@ DefaultApi <- R6::R6Class(
       }
     },
 
-    ListUsersUsersGetWithHttpInfo = function(...){
+    SamplesForStudyMetadataStudiesUuidSamplesGetWithHttpInfo = function(uuid, ...){
       args <- list(...)
       queryParams <- list()
       headerParams <- c()
 
+      if (missing(`uuid`)) {
+        stop("Missing required parameter `uuid`.")
+      }
+
       body <- NULL
-      urlPath <- "/users"
+      urlPath <- "/metadata/studies/{uuid}/samples"
+      if (!missing(`uuid`)) {
+        urlPath <- gsub(paste0("\\{", "uuid", "\\}"), URLencode(as.character(`uuid`), reserved = TRUE), urlPath)
+      }
+
 
       resp <- self$apiClient$CallApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "GET",
@@ -893,7 +1165,52 @@ DefaultApi <- R6::R6Class(
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         deserializedRespObj <- tryCatch(
-          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR")),
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
+          error = function(e){
+             stop("Failed to deserialize response")
+          }
+        )
+        ApiResponse$new(deserializedRespObj, resp)
+      } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
+        ApiResponse$new(paste("Server returned " , httr::status_code(resp) , " response status code."), resp)
+      } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
+        ApiResponse$new("API client error", resp)
+      } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
+        ApiResponse$new("API server error", resp)
+      }
+    },
+    SamplesJsonMetadataSamplesjsonGet = function(...){
+      apiResponse <- self$SamplesJsonMetadataSamplesjsonGetWithHttpInfo(...)
+      resp <- apiResponse$response
+      if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
+        apiResponse$content
+      } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
+        apiResponse
+      } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
+        apiResponse
+      } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
+        apiResponse
+      }
+    },
+
+    SamplesJsonMetadataSamplesjsonGetWithHttpInfo = function(...){
+      args <- list(...)
+      queryParams <- list()
+      headerParams <- c()
+
+      body <- NULL
+      urlPath <- "/metadata/samplesjson"
+
+      resp <- self$apiClient$CallApi(url = paste0(self$apiClient$basePath, urlPath),
+                                 method = "GET",
+                                 queryParams = queryParams,
+                                 headerParams = headerParams,
+                                 body = body,
+                                 ...)
+
+      if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
+        deserializedRespObj <- tryCatch(
+          self$apiClient$deserialize(resp, "AnyType", loadNamespace("metagenomicsClientR2")),
           error = function(e){
              stop("Failed to deserialize response")
           }

@@ -10,29 +10,40 @@ test_that("AddNextflowEventNextflowEventsPost", {
   # base path: http://localhost
   # Add Nextflow Event
   # Events from running Nextflow pipelines when using -with-weblog.  See [the Nextflow documentation](https://www.nextflow.io/docs/latest/tracing.html#weblog-via-http).
-  # @param nextflow.event.model NextflowEventModel 
+  # @param nf.model NFModel 
   # @return [AnyType]
 
   # uncomment below to test the operation
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
-test_that("AddUserUsersPost", {
-  # tests for AddUserUsersPost
+test_that("CreateSampleMetadataSamplesPost", {
+  # tests for CreateSampleMetadataSamplesPost
   # base path: http://localhost
-  # Add User
-  # @param user.model UserModel 
+  # Create Sample
+  # @param sample Sample 
   # @return [AnyType]
 
   # uncomment below to test the operation
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
-test_that("DeleteUserUsersUidDelete", {
-  # tests for DeleteUserUsersUidDelete
+test_that("CreateStudyMetadataStudiesPost", {
+  # tests for CreateStudyMetadataStudiesPost
   # base path: http://localhost
-  # Delete User
-  # @param uid integer 
+  # Create Study
+  # @param study Study 
+  # @return [AnyType]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("DeleteStudyMetadataStudiesUuidDelete", {
+  # tests for DeleteStudyMetadataStudiesUuidDelete
+  # base path: http://localhost
+  # Delete Study
+  # @param uuid character 
   # @return [AnyType]
 
   # uncomment below to test the operation
@@ -74,11 +85,31 @@ test_that("GetNextflowEventNextflowEventsIdGet", {
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
-test_that("GetUserUsersUidGet", {
-  # tests for GetUserUsersUidGet
+test_that("GetSamplesMetadataSamplesGet", {
+  # tests for GetSamplesMetadataSamplesGet
   # base path: http://localhost
-  # Get User
-  # @param uid integer 
+  # Get Samples
+  # @return [AnyType]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetStudiesMetadataStudiesGet", {
+  # tests for GetStudiesMetadataStudiesGet
+  # base path: http://localhost
+  # Get Studies
+  # @return [AnyType]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetUuidFromStringMetadataUuidGet", {
+  # tests for GetUuidFromStringMetadataUuidGet
+  # base path: http://localhost
+  # Get Uuid From String
+  # @param string character 
   # @return [AnyType]
 
   # uncomment below to test the operation
@@ -106,16 +137,27 @@ test_that("ListNextflowEventsNextflowEventsGet", {
   # List Nextflow Events
   # @param limit integer  (optional)
   # @param offset integer  (optional)
+  # @return [NFCollection]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("SamplesForStudyMetadataStudiesUuidSamplesGet", {
+  # tests for SamplesForStudyMetadataStudiesUuidSamplesGet
+  # base path: http://localhost
+  # Samples For Study
+  # @param uuid character 
   # @return [AnyType]
 
   # uncomment below to test the operation
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
-test_that("ListUsersUsersGet", {
-  # tests for ListUsersUsersGet
+test_that("SamplesJsonMetadataSamplesjsonGet", {
+  # tests for SamplesJsonMetadataSamplesjsonGet
   # base path: http://localhost
-  # List Users
+  # Samples Json
   # @return [AnyType]
 
   # uncomment below to test the operation

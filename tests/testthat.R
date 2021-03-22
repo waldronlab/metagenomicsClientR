@@ -1,4 +1,4 @@
 library(testthat)
-library(metagenomicsClientR)
+library(metagenomicsClientR2)
 
-test_check("metagenomicsClientR")
+test_check("metagenomicsClientR2")
