@@ -1,3 +1,6 @@
+utils::globalVariables(c("kind", "bucket", "metageneration", "contentType",
+                         "eventType"))
+
 #' Get list of file changes as tibble
 #'
 #' TODO

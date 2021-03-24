@@ -1,3 +1,6 @@
+utils::globalVariables(c("run_name", "run_id", "event", "utc_time",
+                         "event_id", "accessions", "rowhash"))
+
 #' Check if value is NULL
 #' 
 #' Helper function for get_nf_events()
@@ -60,7 +63,7 @@ get_nf_events <- function(
             script <- purrr::map_chr(resp$hits, ~check_null(.x$trace$script)),
             accessions = gsub(".*accessions: (.*\\]).*", "\\1", script),
             rowhash = gsub(".*rowhash: (.*)....sampleinfo.txt.*", "\\1", script),
-            sample = gsub(".*sample: (.*).*accessions:.*$", "\\1" , script)
+            sample = gsub(".*sample: (.*).*\naccessions:.*$", "\\1" , script)
             
         ) %>% 
         dplyr::select(run_name, run_id, event, utc_time, event_id, sample, accessions, rowhash) 
