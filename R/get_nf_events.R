@@ -34,6 +34,11 @@ check_null <- function(x) {
 #' @export
 #'
 #' @examples
+#' 
+#'  # Get the first 100 file changes
+#' x <- get_nf_events(limit = 100)
+#' x
+#' 
 get_nf_events <- function(
     limit = 100,
     offset = 0

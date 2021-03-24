@@ -17,3 +17,10 @@ tibble
 \description{
 Get nextflow events
 }
+\examples{
+
+ # Get the first 100 file changes
+x <- get_nf_events(limit = 100)
+x
+
+}
