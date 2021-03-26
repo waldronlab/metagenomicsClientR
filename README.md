@@ -1,12 +1,12 @@
 # metagenomicsClientR
 
-R Package Client for Curated Metagenomics Web Portal and API
-
 <!-- badges: start -->
 [![lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](./LICENSE.md)
 <!-- badges: end -->
+
+R Package Client for Curated Metagenomics Web Portal and API.
 
 
 

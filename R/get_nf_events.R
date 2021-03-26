@@ -1,5 +1,5 @@
 utils::globalVariables(c("run_name", "run_id", "event", "utc_time",
-                         "event_id", "accessions", "rowhash"))
+                         "event_id", "accessions", "rowhash", "metadata"))
 
 #' Check if value is NULL
 #' 
