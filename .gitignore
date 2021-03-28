@@ -35,5 +35,6 @@ vignettes/*.pdf
 *.knit.md
 
 inst/doc
-doc
+#doc
 Meta
+doc
