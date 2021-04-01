@@ -1,6 +1,5 @@
 utils::globalVariables(c("kind", "bucket", "metageneration", "contentType",
                          "eventType"))
-
 #' Get list of file changes as tibble
 #'
 #' TODO
@@ -14,15 +13,17 @@ utils::globalVariables(c("kind", "bucket", "metageneration", "contentType",
 #' @return tibble
 #' @importFrom dplyr bind_rows
 #' @importFrom magrittr %>%
+#' @importFrom tibble as_tibble
+#' @importFrom purrr map_at
+#' @importFrom readr parse_datetime
 #' @export
 #'
 #' @examples
 #' # Get the first 10 file changes
-#' x <- get_file_changes(limit = 10)
+#' x <- get_files_changes(limit = 10)
 #' x
 #'
-
-get_file_changes <- function(
+get_files_changes <- function(
     limit = 100,
     offset = 0,
     start_date = NULL,
@@ -40,5 +41,9 @@ get_file_changes <- function(
     df <- dplyr::bind_rows(hit_list) %>%
         dplyr::select(-kind, -bucket, -metageneration,
                       -contentType, -eventType)
+    df <- purrr::map_at(df,
+        c("timeCreated", "updated", "eventTime"),
+        ~readr::parse_datetime(.x), "%Y-%m-%dT%H:%M:%S+%z") %>% 
+        tibble::as_tibble()
     return(df)
 }

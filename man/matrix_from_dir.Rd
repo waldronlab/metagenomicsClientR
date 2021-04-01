@@ -2,21 +2,16 @@
 % Please edit documentation in R/matrix_from_dir.R
 \name{matrix_from_dir}
 \alias{matrix_from_dir}
-\title{Title}
+\title{Read files from a directory and merge them into a matrix}
 \usage{
 matrix_from_dir(dir_path)
 }
 \arguments{
-\item{dir_path}{Character vector indicating path of the directory with tsv files.}
+\item{dir_path}{String indicating the full path to a directory.}
 }
 \value{
 matrix
 }
 \description{
-Title
-}
-\examples{
-
-
-
+\code{matrix_from_dir} reads all tsv files from a  directory and merge them into a numeric matrix. The first column of the tsv files must contain the names of the features. A single column of type numeric containing the values for each feature is expected.
 }

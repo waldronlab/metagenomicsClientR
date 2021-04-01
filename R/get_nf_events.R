@@ -1,5 +1,4 @@
-utils::globalVariables(c("run_name", "run_id", "event", "utc_time",
-                         "event_id", "accessions", "rowhash", "metadata"))
+utils::globalVariables(c("trace", "command_line", "script", "utc_time" ))
 
 #' Check if value is NULL
 #' 
@@ -24,7 +23,7 @@ check_null <- function(x) {
 #' Get nextflow events
 #'
 #' 
-#' @inheritParams get_file_changes
+#' @inheritParams get_files_changes
 #'
 #' @return tibble
 #' @importFrom dplyr mutate
@@ -33,6 +32,7 @@ check_null <- function(x) {
 #' @importFrom tidyr unnest_wider
 #' @importFrom purrr map_chr
 #' @importFrom magrittr %>%
+#' @importFrom readr parse_datetime
 #' @export
 #'
 #' @examples
@@ -59,12 +59,12 @@ get_nf_events <- function(
         dplyr::mutate(
             command_line = purrr::map_chr(resp$hits, ~check_null(.x$metadata$workflow$commandLine)),
             metadata = purrr::map_chr(resp$hits, ~check_null(.x$metadata$parameters$metadata_tsv)),
-            script <- purrr::map_chr(resp$hits, ~check_null(.x$trace$script)),
+            script = purrr::map_chr(resp$hits, ~check_null(.x$trace$script)),
             accessions = gsub(".*accessions: (.*\\]).*", "\\1", script),
             rowhash = gsub(".*rowhash: (.*)....sampleinfo.txt.*", "\\1", script),
-            sample = gsub(".*sample: (.*).*\naccessions:.*$", "\\1" , script)
-            
+            sample = gsub(".*sample: (.*).*\naccessions:.*$", "\\1" , script),
+            utc_time = readr::parse_datetime(utc_time, "%Y-%m-%dT%H:%M:%S+%z")
         ) %>% 
-        dplyr::select(run_name, run_id, event, utc_time, event_id, metadata, sample, accessions, rowhash) 
+        dplyr::select(-trace, -command_line, -script)
     return(y)
 }

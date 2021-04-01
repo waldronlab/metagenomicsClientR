@@ -28,8 +28,29 @@ Packages:
 library(metagenomicsClientR)
 library(BiocFileCache)
 library(dplyr)
-library(magrittr)
 ```
+
+# Functions to interact with the API's endpoints
+
+## files/changes
+
+**GET**
+
+```{r}
+files_changes <- get_files_changes(limit = 10)
+glimpse(files_changes)
+```
+
+
+## nextflow/events
+
+**GET**
+
+```{r}
+nf_events <- get_nf_events(limit = 15)
+glimpse(nf_events)
+```
+
 
 # Download a file
 
@@ -45,11 +66,11 @@ cache
 
 ## Get data information through the API
 
-In this example, we'll use the `get_file_changes` function to access the *files/changes* endpoint of the API and get a list of the files matching "AsnicarF". The output is a tibble containing, among other data, the URLs to download the files.
+In this example, we'll use the `get_files_changes` function to access the *files/changes* endpoint of the API and get a list of the files matching "AsnicarF". The output is a tibble containing, among other data, the URLs to download the files.
 
 
 ```{r}
-x <- get_file_changes(filename_regex = "AsnicarF")
+x <- get_files_changes(filename_regex = "AsnicarF")
 x <- select(x, name, timeCreated, eventTime, event_id, download_url)
 x
 x$name
